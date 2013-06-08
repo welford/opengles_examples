@@ -1,4 +1,12 @@
 #################
+## Project
+#################
+copy_to_rpi.bat
+copy_list.txt
+exclude.txt
+
+
+#################
 ## Eclipse
 #################
 
