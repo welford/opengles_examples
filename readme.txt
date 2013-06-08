@@ -19,9 +19,10 @@ OR
 git clone git://github.com/welford/opengles_examples.git
 
 #################################
-Building
+Building and running
 #################################
-Go into each example and type "make" on the command line
+Go into each examples directory and type "make" on the command line
+then run ./000.bin etc
 
 #################################
 Examples
