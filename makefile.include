@@ -1,19 +1,26 @@
-
-#CDFLAGS+=
-LDFLAGS+=-L/opt/vc/lib/ -lGLESv2 -lEGL
-INCLUDES+=-I/opt/vc/include/ -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux
-
-all: $(BIN) $(LIB)
+CC = gcc
 
 %.o: %.c
 	@rm -f $@ 
-	$(CC) $(CFLAGS) $(INCLUDES) -g -c $< -o $@ 
+	$(CC) $(CDFLAGS) $(INCLUDES) -g -c $< -o $@ 
 
-%.bin: $(OBJS)
+$(BIN): $(OBJS)
 	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 
 clean:
 	for i in $(OBJS); do (if test -e "$$i"; then ( rm $$i ); fi ); done
-	@rm -f $(BIN) $(LIB)
+	for i in $(BIN); do (if test -e "$$i"; then ( rm $$i ); fi ); done
+#	@rm -f $(BIN) $(LIB)
 
+all: OBJS += ../platform.pi.o -lm
+all: CDFLAGS  +=-DRPI_PLATFORM_ORIGINAL=1 -O3
+all: LDFLAGS  +=-L/opt/vc/lib/ -lGLESv2 -lEGL -O3
+all: INCLUDES +=-I/opt/vc/include/ -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux
+all: $(BIN) $(LIB)
 
+sdl: OBJS += ../platform.pi.sdl.o -lm
+sdl: CDFLAGS  += -DRPI_PLATFORM_BOOKWORM_SDL=1 -O3
+sdl: LDFLAGS  += -L/opt/vc/lib/ -lGLESv2 -lSDL2 -O3
+
+sdl: $(BIN) $(LIB)
+	

@@ -1,7 +1,6 @@
 # OpenGL ES Examples
 
-
-some very simple examples of OpenGL ES on the Raspberry Pi
+Some very simple examples of OpenGL ES on the Raspberry Pi
 
 ## Getting Started
 
@@ -17,10 +16,13 @@ git clone git://github.com/welford/opengles_examples.git
 
 ## Building and running
 
-Go into each examples directory and type "make" on the command line
+2024:   Go into each examples directory and type "make sdl" on the command line
+2014(?):Go into each examples directory and type "make" on the command line
 then run ./000.bin etc
 
 ## Examples
+
+Press escape to quit any of the examples
 
 000 Creates a window ready for opengl drawing and clears it
 
@@ -48,4 +50,4 @@ then run ./000.bin etc
 
 012 Rendering to a framebuffer object
 
-hopefully there will be more to come...
+There will not be more to come...

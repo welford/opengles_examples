@@ -35,11 +35,22 @@ static const float vertices[] = {
 static unsigned char indices[] = {	0, 1, 3, 2 };
 
 static const char* pVertexShader = "\
-attribute vec4 position;\n\attribute vec3 colour;\n\varying vec3 vColour;\n\uniform vec3 offset;\n\void main() {\n\	gl_Position = vec4(position.xyz+offset,position.w);\n\	vColour = colour;\n\}\n";
+attribute ve../platform.pi.o c4 position;\n\
+attribute vec3 colour;\n\
+varying vec3 vColour;\n\
+uniform vec3 offset;\n\
+void main() {\n\
+	gl_Position = vec4(position.xyz+offset,position.w);\n\
+	vColour = colour;\n\
+}\n";
 
 static const char* pFragmentShader = "\
+precision mediump float;\n\
 varying vec3 vColour;\n\
-void main() {\n\		//gl_FragColor = vec4(vColour,1.0);\n\		gl_FragColor = vec4(gl_FragCoord.x/640.0, 0.0, gl_FragCoord.z, 1.0);\n\}\n";
+void main() {\n\
+		//gl_FragColor = vec4(vColour,1.0);\n\
+		gl_FragColor = vec4(gl_FragCoord.x/640.0, 0.0, gl_FragCoord.z, 1.0);\n\
+}\n";
 
 int main ()
 {
@@ -54,7 +65,7 @@ int main ()
 	SShaderProgram program;
 
 	CPlatform platform;
-	Create(&platform, "", 2, 1, 640, 640, 8, 8, 8, 8, 16, 8, 0);	
+	Create(&platform, "", 2, 0, 640, 640, 8, 8, 8, 8, 16, 8, 0);	
 
 	//-------------------
 	//setup the shaders
@@ -87,7 +98,7 @@ int main ()
 	SetClearColour(0, 0, 0, 0.0f); //alpha to 0, should make triangle appear over console
 
 	Start(&program); 
-	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]))
+	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]) && !platform.m_quit)
 	{
 		Tick(&platform);
 		ClearScreenBuffer(COLOR_BIT);

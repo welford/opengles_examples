@@ -24,11 +24,16 @@ static const float vertices[] = {
 
 
 static const char* pVertexShader = "\
-attribute vec4 position;\n\void main() {\n\	gl_Position = position;\n\}\n\
+attribute vec4 position;\n\
+void main() {\n\
+	gl_Position = position;\n\
+}\n\
 ";
 
 static const char* pFragmentShader = "\
-	void main() {\n\	    gl_FragColor = vec4(1.0);\n\	}\n\
+	void main() {\n\
+	    gl_FragColor = vec4(1.0);\n\
+	}\n\
 ";
 //static variables 
 GLuint ab=0;	
@@ -46,7 +51,7 @@ int main ()
 	SShaderProgram program;
 
 	CPlatform platform;
-	Create(&platform, "", 2, 1, 320, 240, 1, 0, 0, 0, 0, 0, 0);	
+	Create(&platform, "", 2, 0, 320, 240, 1, 0, 0, 0, 0, 0, 0);	
 	
 	//setup the shaders
 	CreateShader(&vertexShader, VERT, &pVertexShader, 1);	
@@ -73,7 +78,7 @@ int main ()
 	glClearColor(0,0,0,0);
 	Start(&program); //even when glDeleteProgram is called the program won't be deleted untilit7s out of use
 
-	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]))
+	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]) && !platform.m_quit)
 	{
 		Tick(&platform);
 		glClearColor(clr[0], clr[1], clr[2], 1.0f);

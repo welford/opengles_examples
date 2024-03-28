@@ -1,5 +1,10 @@
 #include "platform.h"
 
+// I cant remember what the name of the original os was
+// but if you are using that should should #define this 
+// below somewhere as 1
+#if RPI_PLATFORM_ORIGINAL
+
 #include <wchar.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -295,3 +300,5 @@ void Close(CPlatform* pPlatform)
 	eglTerminate( pState->display );
 	free(pState);
 }
+
+#endif //RPI_ORIGINAL_PLATFORM

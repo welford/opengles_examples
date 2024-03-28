@@ -42,12 +42,22 @@ static unsigned char indices[] = {	0, 3, 1, 2 };
 
 
 static const char* pVertexShader = "\
-attribute vec4 position;\n\attribute vec2 texture;\n\uniform mat4 mvp;\n\\n\varying vec2 vtex;\n\void main() {\n\	vtex = texture;\n\	gl_Position = mvp *  vec4(position.xyz,1.0);\n\}\n";
+attribute vec4 position;\n\
+attribute vec2 texture;\n\
+uniform mat4 mvp;\n\
+\n\
+varying vec2 vtex;\n\
+void main() {\n\
+	vtex = texture;\n\
+	gl_Position = mvp *  vec4(position.xyz,1.0);\n\
+}\n";
 
 static const char* pFragmentShader = "\
+precision mediump float;\n\
 uniform sampler2D tex;\
 varying vec2 vtex;\n\
-void main() {\n\	gl_FragColor = texture2D(tex, vtex.st);\n\
+void main() {\n\
+	gl_FragColor = texture2D(tex, vtex.st);\n\
 }\n";
 
 //make sure to keep the order the same in here
@@ -120,7 +130,7 @@ int main ()
 	CPlatform platform;
 	
 
-	Create(&platform, "", 2, 1, 240, 480, 8, 8, 8, 8, 16, 8, 0);	
+	Create(&platform, "", 2, 0, 240, 480, 8, 8, 8, 8, 16, 8, 0);	
 
 	// - - - - - - - - - - 
 	// create textures
@@ -276,7 +286,7 @@ int main ()
 	BindTexture(&tex[active_texture]);
 	printf("Texture Index %d, id %d\n",active_texture,tex[active_texture].handle);
 	TransformInitialise(&transform, 10);	
-	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]))
+	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]) && !platform.m_quit)
 	{
 		Tick(&platform);
 		if(IS_BUTTON_TOGGLE_PRESSED(platform.m_keyboard.key[KB_SPACE]))

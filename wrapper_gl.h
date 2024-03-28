@@ -108,7 +108,7 @@ typedef enum
 	TEX_FMT_LUMINANCE_ALPHA, 
 	TEX_FMT_RGB, 
 	TEX_FMT_RGBA,
-	TEX_DEPTH
+	TEX_FMT_DEPTH
 	/*
 	//Order is important
 	DEPTH_COMPONENT=0,

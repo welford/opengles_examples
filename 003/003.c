@@ -43,11 +43,21 @@ static const float vertices[] = {
 
 
 static const char* pVertexShader = "\
-attribute vec4 position;\n\attribute vec3 colour;\n\varying vec3 vryColour;\n\void main() {\n\	gl_Position = position;\n\	vryColour = colour;\n\}\n";
+attribute vec4 position;\n\
+attribute vec3 colour;\n\
+varying vec3 vryColour;\n\
+void main() {\n\
+	gl_Position = position;\n\
+	vryColour = colour;\n\
+}\n";
 
 static const char* pFragmentShader = "\
+precision mediump float;\n\
 varying vec3 vryColour;\n\
-void main() {\n\		//gl_FragColor = vec4(1.0);\n\		gl_FragColor = vec4(vryColour,1.0);\n\}\n";
+void main() {\n\
+		//gl_FragColor = vec4(1.0);\n\
+		gl_FragColor = vec4(vryColour,1.0);\n\
+}\n";
 //static variables 
 GLuint ab=0;	
 
@@ -68,8 +78,7 @@ int main ()
 	SShaderProgram program;
 
 	CPlatform platform;
-	Create(&platform, "", 2, 1, 1024, 768, 8, 8, 8, 8, 16, 8, 0);	
-	//Create(&platform, "", 2, 1, 1024, 768, 0, 0, 0, 0, 16, 8, 0);
+	Create(&platform, "", 2, 0, 1024, 768, 8, 8, 8, 8, 16, 8, 0);	
 
 	//-------------------
 	//setup the shaders
@@ -113,7 +122,7 @@ int main ()
 	//set rendering states
 	glEnable(GL_CULL_FACE);	
 	Start(&program); //even when glDeleteProgram is called the program won't be deleted until it is out of use
-	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]))
+	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]) && !platform.m_quit)
 	{
 		Tick(&platform);
 		glClearColor(clr[0], clr[1], clr[2], 1.0f);

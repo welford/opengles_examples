@@ -32,13 +32,24 @@ static const float vertices[] = {
 static unsigned char indices[] = {	0, 1, 3, 2 };
 
 static const char* pVertexShader = "\
-attribute vec4 position;\n\attribute vec3 colour;\n\attribute vec2 texture;\n\varying vec3 vColour;\n\varying vec2 vTexture;\n\void main() {\n\	gl_Position = vec4(position.xyz,position.w);\n\	vColour = colour;\n\	vTexture = texture;\n\}\n";
+attribute vec4 position;\n\
+attribute vec3 colour;\n\
+attribute vec2 texture;\n\
+varying vec3 vColour;\n\
+varying vec2 vTexture;\n\
+void main() {\n\
+	gl_Position = vec4(position.xyz,position.w);\n\
+	vColour = colour;\n\
+	vTexture = texture;\n\
+}\n";
 
 static const char* pFragmentShader = "\
+precision mediump float;\n\
 varying vec3 vColour;\n\
 varying vec2 vTexture;\n\
 uniform sampler2D tex;\
-void main() {\n\		//gl_FragColor = vec4(vColour,1.0);\n\
+void main() {\n\
+		//gl_FragColor = vec4(vColour,1.0);\n\
 		 gl_FragColor = texture2D(tex, vTexture.st);\n\
 }\n";
 
@@ -91,7 +102,7 @@ int main ()
 	SShaderProgram program;
 
 	CPlatform platform;
-	Create(&platform, "", 2, 1, 640, 640, 8, 8, 8, 8, 16, 8, 0);	
+	Create(&platform, "", 2, 0, 640, 640, 8, 8, 8, 8, 16, 8, 0);	
 
 	pTexture = (unsigned char*)malloc(WIDTH * HEIGHT * 3);
 	for(h=0;h<HEIGHT;h++)
@@ -159,7 +170,7 @@ int main ()
 	SetTextureUnitByLocation(utex, 0);
 	BindTexture(tex+active_texture);	
 	printf("Texture Index %d, id %d\n",active_texture,tex[active_texture]);			
-	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]))
+	while (!IS_BUTTON_PRESSED(platform.m_keyboard.key[KB_ESC]) && !platform.m_quit)
 	{
 		Tick(&platform);
 		if(IS_BUTTON_TOGGLE_PRESSED(platform.m_keyboard.key[KB_SPACE]))

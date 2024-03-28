@@ -1,7 +1,13 @@
 #ifndef _PLATFORM_H_
 #define _PLATFORM_H_
 
+//#define RPI_PLATFORM_BOOKWORM_SDL 1
+//#define RPI_PLATFORM_ORIGINAL 0 
+
 #include "keymap.h"
+#if RPI_PLATFORM_BOOKWORM_SDL
+#include <SDL2/SDL_opengl.h>
+#endif // RPI_PLATFORM_BOOKWORM_SDL
 
 typedef struct 
 {
@@ -66,33 +72,7 @@ typedef struct
 	Gamepad		m_gamepad;		//
 	int			m_showingDebugConsole;
 	void		*m_pData;		// platform specific data		
-	/*
-	//runtime generally called once per frame
-	void Tick(void);
-	void UpdateBuffers(void);
-	void ShowDebugConsole(void);
-	void HideDebugConsole(void);
-
-	//Get/Set
-	float GetDT(void)const{return m_dt;}		
-	int Quit(void)const{return m_quit;}
-
-	PVec2i&	GetSize(void){return m_size;}
-	PVec2i&	GetPosition(void){return m_position;}
-	SMouse& GetMouse(){return m_mouse;}
-	Keyboard& GetKeyboard(){return m_keyboard;}	
-
-	unsigned int  PosX(void)const{return m_position.x;}
-	unsigned int  PosY(void)const{return m_position.y;}
-	unsigned int  Width(void)const{return m_size.x;}
-	unsigned int  Height(void)const{return m_size.y;}		
-	const SMouse& GetMouseState() const{return m_mouse;}
-	const Keyboard& GetKeyboardState() const{return m_keyboard;}
-	const Gamepad& GetGamepad(unsigned int) const{return m_gamepad;}
-
-	CPlatform(void);
-	virtual ~CPlatform(void);
-	*/
+	
 }CPlatform;
 
 //allocate memory ebfore this
