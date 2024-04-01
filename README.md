@@ -16,9 +16,11 @@ git clone git://github.com/welford/opengles_examples.git
 
 ## Building and running
 
-2024:   Go into each examples directory and type "make sdl" on the command line
-2014(?):Go into each examples directory and type "make" on the command line
-then run ./000.bin etc
+* 2024:   Go into each examples directory and type "make sdl" on the command line
+
+* 2014(?): Go into each examples directory and type "make" on the command line
+
+* Then run ./000.bin etc
 
 ## Examples
 
